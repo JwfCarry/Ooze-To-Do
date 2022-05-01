@@ -1,0 +1,32 @@
+/* css初始化文件 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul {
+    list-style: none;
+}
+
+em,
+i {
+    font-style: normal
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+img {
+    border: 0;
+    /* 取消图片底侧有空白缝隙的问题 */
+    vertical-align: middle
+}
+
+body {
+    font-size: 14px;
+    font-family: '微软雅黑', 'Arial Narrow', Arial, sans-serif;
+    margin: 0 auto;
+}
