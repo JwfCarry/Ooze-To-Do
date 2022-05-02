@@ -8,6 +8,7 @@
       style="width: 256px"
       mode="vertical"
       @click="handleClick"
+      class="nav"
     >
       <a-menu-item key="1">
         <template #icon>
@@ -77,7 +78,7 @@ export default {
     });
     //点击 MenuItem 调用此函数
     const handleClick = (menuInfo) => {
-      console.log("click ", menuInfo);
+      // console.log("click ", menuInfo);
     };
 
     return { ...toRefs(state), handleClick };
