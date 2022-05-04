@@ -7,84 +7,104 @@
       v-model:selectedKeys="selectedKeys"
       style="width: 256px"
       mode="vertical"
-      @click="handleClick"
+      @click="handleClick(item)"
       class="nav"
+      v-for="item in asideMenu"
+      :key="item.path"
     >
-      <a-menu-item key="1">
+      <a-menu-item :key="item.key">
         <template #icon>
-          <appstore-outlined />
+          <component :is="$antIcons[item.icon]" />
         </template>
-        首页
-      </a-menu-item>
-      <a-menu-item key="2">
-        <template #icon>
-          <carry-out-outlined />
-        </template>
-        我的一天
-      </a-menu-item>
-      <a-menu-item key="3">
-        <template #icon>
-          <message-outlined />
-        </template>
-        任务清单
-      </a-menu-item>
-      <a-menu-item key="4">
-        <template #icon>
-          <CalendarOutlined />
-        </template>
-        倒数日
-      </a-menu-item>
-      <a-menu-item key="5">
-        <template #icon>
-          <highlight-outlined />
-        </template>
-        备忘录
-      </a-menu-item>
-      <a-menu-item key="6">
-        <template #icon>
-          <setting-outlined />
-        </template>
-        设置
+        {{ item.title }}
       </a-menu-item>
     </a-menu>
+  </div>
+  <!-- 内容区 -->
+  <div class="content">
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive, toRefs } from "vue";
-import {
-  CalendarOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-  CarryOutOutlined,
-  MessageOutlined,
-  HighlightOutlined,
-} from "@ant-design/icons-vue";
+import { reactive, toRefs } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import Headers from "./Header/Headers.vue";
 export default {
   name: "Home",
   components: {
     Headers,
-    CalendarOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
-    CarryOutOutlined,
-    MessageOutlined,
-    HighlightOutlined,
   },
   setup() {
+    //导航栏：当前选中的菜单项 key 数组
     const state = reactive({
-      selectedKeys: [], //导航栏：当前选中的菜单项 key 数组
+      selectedKeys: [],
     });
+    //使用路由api
+    const router = useRouter();
+    const route = useRoute();
+    //存储导航侧边栏信息
+    const asideMenu = reactive([
+      {
+        title: "首页",
+        path: "/main",
+        name: "Main",
+        key: 1,
+        icon: "AppstoreOutlined",
+      },
+      {
+        title: "我的一天",
+        path: "/day",
+        name: "Day",
+        key: 2,
+        icon: "CarryOutOutlined",
+      },
+      {
+        title: "任务清单",
+        path: "/task",
+        name: "Task",
+        key: 3,
+        icon: "MessageOutlined",
+      },
+      {
+        title: "倒数日",
+        path: "/date",
+        name: "Date",
+        key: 4,
+        icon: "CalendarOutlined",
+      },
+      {
+        title: "备忘录",
+        path: "/memorandum",
+        name: "Memorandum",
+        key: 5,
+        icon: "HighlightOutlined",
+      },
+      {
+        title: "设置",
+        path: "/setting",
+        name: "Setting",
+        key: 6,
+        icon: "SettingOutlined",
+      },
+    ]);
     //点击 MenuItem 调用此函数
-    const handleClick = (menuInfo) => {
-      // console.log("click ", menuInfo);
+    const handleClick = (item) => {
+      console.log(item);
+      router.push({
+        name: item.name,
+      });
     };
 
-    return { ...toRefs(state), handleClick };
+    return { ...toRefs(state), handleClick, asideMenu };
   },
 };
 </script>
 
 <style lang="less" scoped>
+.content {
+  position: absolute;
+  top: 100px;
+  left: 305px;
+}
 </style>

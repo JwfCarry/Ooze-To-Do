@@ -3,12 +3,7 @@
     <div class="icon">
       <search-outlined :style="{ fontSize: '24px', color: '#8a8696' }" />
     </div>
-    <input
-      class="search"
-      type="text"
-      placeholder="请输入内容"
-      @change="change()"
-    />
+    <input class="search" type="text" placeholder="请输入内容" />
   </div>
 </template>
 
