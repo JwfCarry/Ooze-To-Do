@@ -5,7 +5,7 @@ const app = createApp(App);
 //引入CSS初始化文件
 import './assets/css/base.css'
 //ant design组件 按需注册
-import { Menu, MenuItem } from 'ant-design-vue';
+import { Menu, MenuItem, } from 'ant-design-vue';
 import * as antIcons from '@ant-design/icons-vue'
 import './assets/css/myTheme.less' //自定义主题
 // 注册icon组件

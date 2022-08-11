@@ -10,7 +10,7 @@
       @click="handleClick(item)"
       class="nav"
       v-for="item in asideMenu"
-      :key="item.path"
+      :key="item.key"
     >
       <a-menu-item :key="item.key">
         <template #icon>
@@ -40,9 +40,6 @@ export default {
     const state = reactive({
       selectedKeys: [],
     });
-    //使用路由api
-    const router = useRouter();
-    const route = useRoute();
     //存储导航侧边栏信息
     const asideMenu = reactive([
       {
@@ -88,9 +85,26 @@ export default {
         icon: "SettingOutlined",
       },
     ]);
+    //使用路由api
+    const router = useRouter();
+    const route = useRoute();
+    /*   //监视路由变化，获取当前路由路径
+    watch(
+      () => router,
+      (newValue) => {
+        let currentPath = newValue.currentRoute.value.fullPath;
+        //解决路由跳转后 左侧导航栏状态不更新的问题
+        console.log("currentPath", currentPath);
+        let findResult = asideMenu.filter((item) => {
+          return item.path === currentPath;
+        });
+      },
+      { immediate: true, deep: true }
+    ); */
+
     //点击 MenuItem 调用此函数
     const handleClick = (item) => {
-      console.log(item);
+      // console.log(item);
       router.push({
         name: item.name,
       });
